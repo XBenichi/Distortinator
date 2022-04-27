@@ -347,14 +347,14 @@ func _on_ConfirmationDialog_confirmed():
 
 func _on_SaveFileDialog_file_selected(path):
 	var f = File.new()
-	f.open(path,2)
+	f.open_compressed(path,2,3)
 	f.store_string(var2str(layers))
 	f.close()
 
 
 func _on_OpenFileDialog_file_selected(path):
 	var f = File.new()
-	f.open(path,1)
+	f.open_compressed(path,1,3)
 	var json = f.get_as_text()
 	layers = str2var(json)
 	createBackground()
