@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Shaders/Video Drug.shader" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/horizontal_distortion = false
+shader_param/vertical_distortion = 0
+shader_param/amplitude = Vector2( 0, 0 )
+shader_param/frequency = Vector2( 0, 0 )
+shader_param/scale = 0.0
+shader_param/move = Vector2( 0, 0 )
+shader_param/ping_pong = null
+shader_param/palette_shifting_speed = 0.0
+shader_param/palette_shifting = null
+shader_param/interleaved = 0
+shader_param/screen_height = 180.0
+
+[node name="TextureRect" type="TextureRect"]
+material = SubResource( 1 )
+margin_right = 320.0
+margin_bottom = 180.0
+stretch_mode = 2
