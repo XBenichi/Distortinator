@@ -74,6 +74,8 @@ uniform float screen_width = 320;
 		
 	}
 	
+	
+	
 	if (interleaved.y) {
 		if ( int(UV.x * screen_width) % 2 == 0 ){
 		
@@ -84,6 +86,8 @@ uniform float screen_width = 320;
 		}
 		COLOR = (texture(TEXTURE, vec2(newuv.x, newuv.y + diff_y)));
 	}
+	
+	
 	
 }
 

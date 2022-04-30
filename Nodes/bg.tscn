@@ -10,11 +10,12 @@ shader_param/amplitude = Vector2( 0, 0 )
 shader_param/frequency = Vector2( 0, 0 )
 shader_param/scale = 0.0
 shader_param/move = Vector2( 0, 0 )
-shader_param/ping_pong = null
+shader_param/ping_pong = false
 shader_param/palette_shifting_speed = 0.0
-shader_param/palette_shifting = null
+shader_param/palette_shifting = false
 shader_param/interleaved = 0
 shader_param/screen_height = 180.0
+shader_param/screen_width = 320.0
 
 [node name="TextureRect" type="TextureRect"]
 material = SubResource( 1 )
