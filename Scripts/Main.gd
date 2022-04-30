@@ -23,24 +23,23 @@ var currentLayerIndex = -1
 var currentLayer = null
 
 var layers = []
-onready var root = $Tree.create_item()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	OS.set_window_title("Distortinator Alpha 1.0")
+	OS.set_window_title("Distortinator 1.0")
 	
-	$TabContainer/Layer/Opacity/Slider.editable = false
+	$TabContainer/Layer/LineEdit.editable = false
 	for sliders in get_tree().get_nodes_in_group("sliders"):
 		sliders.editable = false
 	for checks in get_tree().get_nodes_in_group("checks"):
 		checks.disabled = true
-	for buttons in get_tree().get_nodes_in_group("button"):
+	for buttons in get_tree().get_nodes_in_group("buttons"):
 		buttons.disabled = true
-		
+	for lines in get_tree().get_nodes_in_group("lines"):
+		lines.editable = false
 	
 	
-
-	$Tree.set_hide_root(true)
 	
 
 
@@ -277,6 +276,8 @@ func _on_New_pressed():
 			sliders.value = 0
 			if sliders.editable == false:
 				sliders.editable = true
+				if $TabContainer/Layer/LineEdit.editable == false:
+					$TabContainer/Layer/LineEdit.editable = true
 		for checks in get_tree().get_nodes_in_group("checks"):
 			checks.pressed = false
 			if checks.disabled == true:
@@ -284,12 +285,17 @@ func _on_New_pressed():
 		for buttons in get_tree().get_nodes_in_group("buttons"):
 			if buttons.disabled == true:
 				buttons.disabled = false
+		for lines in get_tree().get_nodes_in_group("lines"):
+			if lines.editable == false:
+				lines.editable = true
 		$TabContainer/Layer/LineEdit.text = ("Layer " + var2str(currentLayerIndex))
 		$TabContainer/Layer/TextureRect.texture = null
 		$TabContainer/Layer/Opacity/Slider.value = 1
 		$TabContainer/Layer/Opacity/Slider.editable = true
-		var treelayer = $Tree.create_item(root)
-		treelayer.set_text(0, $TabContainer/Layer/LineEdit.text)
+		$ItemList.add_item($TabContainer/Layer/LineEdit.text)
+		$TabContainer/Effects/ScrollContainer/VBoxContainer/Pal/TextureRect.texture = null
+		
+
 		
 		layers[currentLayerIndex].name = ("Layer " + var2str(currentLayerIndex))
 		layers[currentLayerIndex].node = currentLayer
@@ -318,17 +324,7 @@ func changeLayer():
 func _on_LineEdit_text_changed(new_text):
 	layers[currentLayerIndex].name = new_text
 	#$Tree.get_child(currentLayerIndex).set_text(0,new_text)
-	print(var2str($Tree.get_children()))
-
-
-func _on_Tree_cell_selected():
-	currentLayerIndex 
-	for i in layers.size():
-		if layers[i].name == $Tree.get_selected().get_text(0):
-			if currentLayerIndex != i:
-				currentLayerIndex = i
-				changeLayer()
-				
+	$ItemList.set_item_text(currentLayerIndex,new_text)
 
 
 func _on_NewBG_pressed():
@@ -339,10 +335,20 @@ func _on_ConfirmationDialog_confirmed():
 	for n in $ColorRect.get_children():
 		$ColorRect.remove_child(n)
 		n.queue_free()
-		$Tree.clear()
+		$ItemList.clear()
 		layers.clear()
 		currentLayer = null
 		currentLayerIndex = -1
+		$TabContainer/Layer/LineEdit.editable = false
+		for sliders in get_tree().get_nodes_in_group("sliders"):
+			sliders.editable = false
+			sliders.value
+		for checks in get_tree().get_nodes_in_group("checks"):
+			checks.disabled = true
+		for buttons in get_tree().get_nodes_in_group("buttons"):
+			buttons.disabled = true
+		for lines in get_tree().get_nodes_in_group("lines"):
+			lines.editable = false
 
 
 func _on_SaveFileDialog_file_selected(path):
@@ -365,7 +371,7 @@ func createBackground():
 	for n in $ColorRect.get_children():
 		$ColorRect.remove_child(n)
 		n.queue_free()
-		$Tree.clear()
+		$ItemList.clear()
 		layers.clear()
 		currentLayer = null
 		currentLayerIndex = -1
@@ -390,15 +396,20 @@ func createBackground():
 		for buttons in get_tree().get_nodes_in_group("buttons"):
 			if buttons.disabled == true:
 				buttons.disabled = false
-		$TabContainer/Layer/LineEdit.text = ("Layer " + var2str(currentLayerIndex))
+		for lines in get_tree().get_nodes_in_group("lines"):
+			if lines.editable == false:
+				lines.editable = true
+		$TabContainer/Layer/LineEdit.text = layers[currentLayerIndex].name
 		$TabContainer/Layer/TextureRect.texture = null
 		$TabContainer/Layer/Opacity/Slider.value = 1
 		$TabContainer/Layer/Opacity/Slider.editable = true
-		var treelayer = $Tree.create_item(root)
-		treelayer.set_text(0, $TabContainer/Layer/LineEdit.text)
-	
+		$ItemList.add_item($TabContainer/Layer/LineEdit.text)
+		#treelayer = $Tree.create_item(root)
+		#treelayer.set_text(0, $TabContainer/Layer/LineEdit.text)
+
 		
-		layers[currentLayerIndex].name = ("Layer " + var2str(currentLayerIndex))
+		
+		#layers[currentLayerIndex].name = ("Layer " + var2str(currentLayerIndex))
 		layers[currentLayerIndex].node = currentLayer
 		
 		$TabContainer/Layer/Opacity/Slider.value = layers[currentLayerIndex].opacity
@@ -435,6 +446,28 @@ func _on_Remove_pressed():
 	$ColorRect.remove_child(n)
 	n.queue_free()
 	layers.remove(currentLayerIndex)
+	$ItemList.remove_item(currentLayerIndex)
 	currentLayerIndex = currentLayerIndex - 1
-	$Tree.get_selected().get_parent().remove_child($Tree.get_selected())
-	
+	currentLayer = layers[currentLayerIndex].node
+	#$Tree.get_selected().get_parent().remove_child($Tree.get_selected())
+	$TabContainer/Layer/Opacity/Slider.value = layers[currentLayerIndex].opacity
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider.value = layers[currentLayerIndex].amplitude.x
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider.value = layers[currentLayerIndex].amplitude.y
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider.value = layers[currentLayerIndex].frequency.x
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider.value = layers[currentLayerIndex].frequency.y
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider.value = layers[currentLayerIndex].scale
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider.value = layers[currentLayerIndex].move.x
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider.value = layers[currentLayerIndex].move.y
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider.value = layers[currentLayerIndex].palette_shifting_speed
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Ping/CheckBox.pressed = layers[currentLayerIndex].ping_pong
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft/CheckBox.pressed = layers[currentLayerIndex].palette_shifting
+	$TabContainer/Layer/LineEdit.text = layers[currentLayerIndex].name
+
+
+func _on_ItemList_item_selected(index):
+	for i in layers.size():
+		if layers[i].name == $ItemList.get_item_text(index):
+			if currentLayerIndex != i:
+				currentLayerIndex = i
+				changeLayer()
+				
