@@ -15,6 +15,7 @@ uniform sampler2D palette;
 uniform bool palette_shifting;
 uniform bvec2 interleaved;
 uniform float screen_height = 180;
+uniform float screen_width = 320;
 
  void fragment(){
     vec2 newuv = UV;
@@ -47,6 +48,7 @@ uniform float screen_height = 180;
 	float diff_x = 0.0;
 	float diff_y = 0.0;
 	
+	
 	if (palette_shifting) {
 		COLOR = vec4(texture(palette, vec2(ccycle, 0)).rgb, c.a);
 	}
@@ -54,12 +56,12 @@ uniform float screen_height = 180;
 	
 	
 	if (interleaved.x) {
-		if ( int(newuv.y * screen_height) % 2 == 0 ){
+		if ( int(UV.y * screen_height) % 2 == 0 ){
 		
-			diff_x += 0.03 * sin((amplitude.x * newuv.y) + (scale * TIME));
+			diff_x += 0.075 * sin((amplitude.x * UV.y) + (2.0 * TIME));
 		
 		}else{
-			diff_x -= 0.01 * sin((amplitude.x * newuv.y) + (scale * TIME));
+			diff_x += -0.075 * sin((amplitude.x * UV.y) + (2.0 * TIME));
 		}
 		
 		if (palette_shifting) {
@@ -71,5 +73,18 @@ uniform float screen_height = 180;
 	} else {
 		
 	}
+	
+	if (interleaved.y) {
+		if ( int(UV.x * screen_width) % 2 == 0 ){
+		
+			diff_y += 0.075 * sin((amplitude.y * UV.x) + (2.0 * TIME));
+		
+		}else{
+			diff_y += -0.075 * sin((amplitude.y * UV.x) + (2.0 * TIME));
+		}
+		COLOR = (texture(TEXTURE, vec2(newuv.x, newuv.y + diff_y)));
+	}
+	
 }
+
 
