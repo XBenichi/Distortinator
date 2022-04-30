@@ -27,12 +27,11 @@ margin_right = 342.0
 margin_bottom = 213.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Tree" type="Tree" parent="."]
+[node name="ItemList" type="ItemList" parent="."]
 margin_left = 22.0
-margin_top = 221.0
-margin_right = 342.0
-margin_bottom = 345.0
-allow_reselect = true
+margin_top = 219.0
+margin_right = 344.0
+margin_bottom = 346.0
 
 [node name="TabContainer" type="TabContainer" parent="."]
 margin_left = 359.0
@@ -122,7 +121,7 @@ page = 0.01
 value = 1.0
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Layer/Opacity/Slider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Layer/Opacity/Slider" groups=["lines"]]
 margin_left = 96.0
 margin_top = -5.0
 margin_right = 170.0
@@ -224,7 +223,7 @@ step = 0.1
 page = 0.1
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider" groups=["lines"]]
 margin_left = 112.0
 margin_top = -5.0
 margin_right = 186.0
@@ -246,7 +245,7 @@ step = 0.1
 page = 0.1
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider" groups=["lines"]]
 margin_left = 112.0
 margin_top = -5.0
 margin_right = 170.0
@@ -275,7 +274,7 @@ step = 0.1
 page = 0.1
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider" groups=["lines"]]
 margin_left = 112.0
 margin_top = -5.0
 margin_right = 170.0
@@ -297,7 +296,7 @@ step = 0.1
 page = 0.1
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider" groups=["lines"]]
 margin_left = 112.0
 margin_top = -5.0
 margin_right = 170.0
@@ -326,7 +325,7 @@ step = 0.1
 page = 0.1
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider" groups=["lines"]]
 margin_left = 112.0
 margin_top = -5.0
 margin_right = 170.0
@@ -407,7 +406,7 @@ step = 0.1
 page = 0.1
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider" groups=["lines"]]
 margin_left = 112.0
 margin_top = -5.0
 margin_right = 170.0
@@ -429,7 +428,7 @@ step = 0.1
 page = 0.1
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider" groups=["lines"]]
 margin_left = 112.0
 margin_top = -5.0
 margin_right = 170.0
@@ -508,7 +507,7 @@ step = 0.1
 page = 0.1
 scrollable = false
 
-[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider"]
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider" groups=["lines"]]
 margin_left = 112.0
 margin_top = -5.0
 margin_right = 170.0
@@ -573,7 +572,7 @@ margin_bottom = 315.0
 window_title = "Save Background"
 resizable = true
 access = 2
-filters = PoolStringArray( "*.ebg" )
+filters = PoolStringArray( "*.mbg" )
 current_dir = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer"
 current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
 
@@ -582,15 +581,15 @@ margin_left = 55.0
 margin_top = 22.0
 margin_right = 571.0
 margin_bottom = 315.0
-window_title = "Open Background"
+window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
-filters = PoolStringArray( "*.ebg" )
+filters = PoolStringArray( "*.mbg" )
 current_dir = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer"
 current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
 
-[connection signal="cell_selected" from="Tree" to="." method="_on_Tree_cell_selected"]
+[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="pressed" from="TabContainer/Layer/Open" to="." method="_on_imageOpen_pressed"]
 [connection signal="text_changed" from="TabContainer/Layer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="file_selected" from="TabContainer/Layer/LineEdit/FileDialog" to="." method="_on_FileDialog_file_selected"]
