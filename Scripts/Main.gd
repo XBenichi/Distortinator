@@ -61,6 +61,9 @@ func _on_FileDialog_file_selected(path):
 	currentLayer.texture = image_texture
 	layers[currentLayerIndex].image = var2str(image_texture)
 	$TabContainer/Layer/TextureRect.texture = image_texture
+	print(Vector2($TabContainer/Layer/TextureRect.texture.get_size().x,$TabContainer/Layer/TextureRect.texture.get_size().y))
+	currentLayer.material.set("shader_param/screen_height",$TabContainer/Layer/TextureRect.texture.get_size().y)
+	currentLayer.material.set("shader_param/screen_width",$TabContainer/Layer/TextureRect.texture.get_size().x)
 	
 
 func _on_AmpXSlider_value_changed(value):
