@@ -433,8 +433,8 @@ func createBackground():
 
 
 
-func _on_Open_pressed():
-	$FileDialog2.popup()
+#func _on_Open_pressed():
+	#$FileDialog2.popup()
 
 
 func _on_Save_pressed():
@@ -471,3 +471,52 @@ func _on_ItemList_item_selected(index):
 				currentLayerIndex = i
 				changeLayer()
 				
+
+func _on_FECheckBox_pressed():
+	var onoff = currentLayer.material.get("shader_param/barrel")
+	if $TabContainer/Effects/ScrollContainer/VBoxContainer/Brl/CheckBox.pressed == true:
+		currentLayer.material.set("shader_param/barrel",1)
+		layers[currentLayerIndex].palette_shifting = true
+	else:
+		currentLayer.material.set("shader_param/barrel",0)
+		layers[currentLayerIndex].palette_shifting = false
+
+
+func _on_FEPOSXSlider_value_changed(value):
+	currentLayer.material.set("shader_param/barrelxy",Vector2(value,$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider.value))
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider/LineEdit.value = value
+	layers[currentLayerIndex].barrelxy = currentLayer.material.get("shader_param/barrelxy")
+
+
+func _on_FEPOSYSlider_value_changed(value):
+	currentLayer.material.set("shader_param/barrelxy",Vector2($TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider.value,value))
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider/LineEdit.value = value
+	layers[currentLayerIndex].barrelxy = currentLayer.material.get("shader_param/barrelxy")
+
+
+func _on_FEESlider_value_changed(value):
+	currentLayer.material.set("shader_param/effect",value)
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider/LineEdit.value = value
+	layers[currentLayerIndex].scale = currentLayer.material.get("shader_param/effect")
+
+
+
+func _on_FESSlider_value_changed(value):
+	currentLayer.material.set("shader_param/effect_scale",value)
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider/LineEdit.value = value
+	layers[currentLayerIndex].scale = currentLayer.material.get("shader_param/effect_scale")
+
+func _on_FEPOSLineEdit_value_changed(value):
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider.value = value
+
+
+func _on_FEPOSYLineEdit_value_changed(value):
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider.value = value
+
+
+func _on_FEELineEdit_value_changed(value):
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider.value = value
+
+
+func _on_FESLineEdit_value_changed(value):
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider.value = value

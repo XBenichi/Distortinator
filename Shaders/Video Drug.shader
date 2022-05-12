@@ -2,7 +2,7 @@ shader_type canvas_item;
 //replace "blend_mix" with "blend_add" or "blend_sub" or "blend_mul" to change blend mode
 render_mode blend_mix;
 
-//these are variables
+
 uniform bool horizontal_distortion;
 uniform bvec2 vertical_distortion;
 uniform vec2 amplitude = vec2(0,0);
@@ -16,9 +16,33 @@ uniform bool palette_shifting;
 uniform bvec2 interleaved;
 uniform float screen_height = 180;
 uniform float screen_width = 320;
+uniform bool barrel = false;
+uniform float effect = 1; // -1.0 is BARREL, 0.1 is PINCUSHION. For planets, ideally -1.1 to -4.
+uniform float effect_scale = 2; // Play with this to slightly vary the results.
+uniform vec2 barrelxy = vec2(1.0,1.0);
 
- void fragment(){
-    vec2 newuv = UV;
+vec2 distort(vec2 p) {
+	float d = length(p);
+	float z = sqrt(1.0 + d * d * effect);
+	float r = atan(d, z) / 3.14159;
+	r *= effect_scale;
+	float phi = atan(p.y, p.x);
+	return vec2(r*cos(phi)+.5,r*sin(phi)+.5);
+}
+
+void fragment(){
+	
+	vec2 newuv = UV;
+	
+	vec2 xy = vec2(2.0 * UV);
+	
+	xy -= barrelxy;
+	
+	if (barrel){
+		newuv = distort(xy);
+	} else {
+		newuv = UV;
+	}
 	//tbh i dont know how to explain what it does, ill just say it makes the background move
 	if (horizontal_distortion) { //oscillation
 		newuv.x += amplitude.x * sin((frequency.x * newuv.y) + scale * TIME)/1.0;
@@ -31,8 +55,7 @@ uniform float screen_width = 320;
 	} else if (vertical_distortion.y) { //compression
 		newuv.y += amplitude.y * cos((frequency.y * newuv.y) + scale * TIME)/1.0;
 	}
-	//this one i can explain, it moves the texture to up and right using postives, down and left using negetives
-	//the higher the number the faster it is
+	
 	if (ping_pong) {
 		newuv.x += move.x * sin(scale * TIME);
 		newuv.y += move.y * cos(scale * TIME);
@@ -47,6 +70,13 @@ uniform float screen_width = 320;
 	float ccycle = mod(c.r - TIME * palette_shifting_speed, 1.0);
 	float diff_x = 0.0;
 	float diff_y = 0.0;
+	
+	
+	
+	
+	float d = length(xy);
+	
+	
 	
 	
 	if (palette_shifting) {
@@ -68,7 +98,7 @@ uniform float screen_width = 320;
 			palette_shifting_speed * 2.0;
 			COLOR = COLOR + (texture(TEXTURE, vec2(newuv.x + diff_x, newuv.y)));
 		} else{
-			COLOR = (texture(TEXTURE, vec2(newuv.x + diff_x, newuv.y)));
+			COLOR = (texture(TEXTURE, vec2(newuv.x + diff_x, newuv.y )));
 		
 	} else {
 		
@@ -86,9 +116,4 @@ uniform float screen_width = 320;
 		}
 		COLOR = (texture(TEXTURE, vec2(newuv.x, newuv.y + diff_y)));
 	}
-	
-	
-	
 }
-
-

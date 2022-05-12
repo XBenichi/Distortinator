@@ -40,6 +40,7 @@ margin_right = 622.0
 margin_bottom = 345.0
 
 [node name="Layer" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -68,6 +69,7 @@ margin_top = 35.0
 margin_right = 331.0
 margin_bottom = 215.0
 rect_scale = Vector2( 0.4, 0.4 )
+expand = true
 stretch_mode = 2
 
 [node name="LineEdit" type="LineEdit" parent="TabContainer/Layer"]
@@ -371,7 +373,6 @@ text = "y
 "
 
 [node name="Effects" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -381,15 +382,15 @@ margin_bottom = -4.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Effects"]
 margin_right = 256.0
-margin_bottom = 551.0
+margin_bottom = 302.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Effects/ScrollContainer"]
-margin_right = 70.0
-margin_bottom = 265.0
+margin_right = 72.0
+margin_bottom = 499.0
 custom_constants/separation = 16
 
 [node name="Move" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
-margin_right = 70.0
+margin_right = 72.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 70, 60 )
 text = "
@@ -441,7 +442,7 @@ page = 0.1
 
 [node name="Ping" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 76.0
-margin_right = 70.0
+margin_right = 72.0
 margin_bottom = 106.0
 rect_min_size = Vector2( 70, 30 )
 text = "Ping pong"
@@ -454,7 +455,7 @@ margin_bottom = 20.0
 
 [node name="PalSft" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 122.0
-margin_right = 70.0
+margin_right = 72.0
 margin_bottom = 153.0
 rect_min_size = Vector2( 70, 30 )
 text = "Pallette
@@ -468,7 +469,7 @@ margin_bottom = 20.0
 
 [node name="Pal" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 169.0
-margin_right = 70.0
+margin_right = 72.0
 margin_bottom = 209.0
 rect_min_size = Vector2( 70, 40 )
 text = "Palette"
@@ -490,7 +491,7 @@ text = "Open"
 
 [node name="PalSpd" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 225.0
-margin_right = 70.0
+margin_right = 72.0
 margin_bottom = 265.0
 rect_min_size = Vector2( 70, 40 )
 text = "Palette
@@ -513,6 +514,134 @@ margin_top = -5.0
 margin_right = 170.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
+min_value = -5.0
+max_value = 5.0
+step = 0.1
+page = 0.1
+
+[node name="Brl" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
+margin_top = 281.0
+margin_right = 72.0
+margin_bottom = 311.0
+rect_min_size = Vector2( 70, 30 )
+text = "FishEye"
+
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Brl" groups=["checks"]]
+margin_left = 73.0
+margin_top = -4.0
+margin_right = 97.0
+margin_bottom = 20.0
+
+[node name="FEPos" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
+margin_top = 327.0
+margin_right = 72.0
+margin_bottom = 387.0
+rect_min_size = Vector2( 70, 60 )
+text = "
+FishEye
+Posiion"
+
+[node name="XSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos" groups=["sliders"]]
+margin_left = 71.0
+margin_top = 5.0
+margin_right = 179.0
+margin_bottom = 21.0
+min_value = -10.0
+max_value = 10.0
+step = 0.05
+page = 0.05
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider" groups=["lines"]]
+margin_left = 112.0
+margin_top = -5.0
+margin_right = 170.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 24 )
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+
+[node name="YSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos" groups=["sliders"]]
+margin_left = 71.0
+margin_top = 33.0
+margin_right = 179.0
+margin_bottom = 49.0
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider" groups=["lines"]]
+margin_left = 112.0
+margin_top = -5.0
+margin_right = 170.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 24 )
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+
+[node name="FEEfct" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
+margin_top = 403.0
+margin_right = 72.0
+margin_bottom = 443.0
+rect_min_size = Vector2( 70, 40 )
+text = "FishEye
+Effect"
+
+[node name="Slider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct" groups=["sliders"]]
+margin_left = 71.0
+margin_top = 5.0
+margin_right = 179.0
+margin_bottom = 21.0
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider" groups=["lines"]]
+margin_left = 112.0
+margin_top = -5.0
+margin_right = 170.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 24 )
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+
+[node name="FEScale" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
+margin_top = 459.0
+margin_right = 72.0
+margin_bottom = 499.0
+rect_min_size = Vector2( 70, 40 )
+text = "FishEye
+Effect Scale"
+
+[node name="Slider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale" groups=["sliders"]]
+margin_left = 71.0
+margin_top = 5.0
+margin_right = 179.0
+margin_bottom = 21.0
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider" groups=["lines"]]
+margin_left = 112.0
+margin_top = -5.0
+margin_right = 170.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 24 )
+min_value = -10.0
+max_value = 10.0
 step = 0.1
 page = 0.1
 
@@ -552,15 +681,9 @@ margin_right = 108.0
 margin_bottom = 20.0
 text = "Save"
 
-[node name="Open" type="Button" parent="HBoxContainer"]
-margin_left = 112.0
-margin_right = 159.0
-margin_bottom = 20.0
-text = "Open"
-
 [node name="New" type="Button" parent="HBoxContainer"]
-margin_left = 163.0
-margin_right = 241.0
+margin_left = 112.0
+margin_right = 190.0
 margin_bottom = 20.0
 text = "New Layer"
 
@@ -620,11 +743,19 @@ current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
 [connection signal="pressed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/Pal/TextureRect/Button" to="." method="_on_palButton_pressed"]
 [connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider" to="." method="_on_palSlider_value_changed"]
 [connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider/LineEdit" to="." method="_on_palLineEdit_value_changed"]
+[connection signal="pressed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/Brl/CheckBox" to="." method="_on_FECheckBox_pressed"]
+[connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider" to="." method="_on_FEPOSXSlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider/LineEdit" to="." method="_on_FEPOSLineEdit_value_changed"]
+[connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider" to="." method="_on_FEPOSYSlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider/LineEdit" to="." method="_on_FEPOSYLineEdit_value_changed"]
+[connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider" to="." method="_on_FEESlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider/LineEdit" to="." method="_on_FEELineEdit_value_changed"]
+[connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider" to="." method="_on_FESSlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider/LineEdit" to="." method="_on_FESLineEdit_value_changed"]
 [connection signal="file_selected" from="TabContainer/Effects/palFileDialog" to="." method="_on_palFileDialog_file_selected"]
 [connection signal="pressed" from="HBoxContainer/NewBG" to="." method="_on_NewBG_pressed"]
 [connection signal="confirmed" from="HBoxContainer/NewBG/ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
 [connection signal="pressed" from="HBoxContainer/Save" to="." method="_on_Save_pressed"]
-[connection signal="pressed" from="HBoxContainer/Open" to="." method="_on_Open_pressed"]
 [connection signal="pressed" from="HBoxContainer/New" to="." method="_on_New_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_SaveFileDialog_file_selected"]
 [connection signal="file_selected" from="FileDialog2" to="." method="_on_OpenFileDialog_file_selected"]

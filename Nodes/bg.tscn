@@ -16,9 +16,14 @@ shader_param/palette_shifting = false
 shader_param/interleaved = 0
 shader_param/screen_height = 180.0
 shader_param/screen_width = 320.0
+shader_param/barrel = false
+shader_param/effect = 1.0
+shader_param/effect_scale = 2.0
+shader_param/barrelxy = Vector2( 1, 1 )
 
 [node name="TextureRect" type="TextureRect"]
 material = SubResource( 1 )
 margin_right = 320.0
 margin_bottom = 180.0
+expand = true
 stretch_mode = 2
