@@ -53,6 +53,7 @@ margin_right = 1255.0
 margin_bottom = 690.0
 
 [node name="Layer" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -146,7 +147,6 @@ page = 0.01
 value = 1.0
 
 [node name="Distortion" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -160,7 +160,7 @@ margin_bottom = 632.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Distortion/ScrollContainer"]
 margin_right = 73.0
-margin_bottom = 360.0
+margin_bottom = 588.0
 custom_constants/separation = 16
 
 [node name="Hdistort" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
@@ -359,31 +359,143 @@ rect_min_size = Vector2( 0, 40 )
 text = "Interleaved"
 
 [node name="Xcheck" type="CheckBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved" groups=["checks"]]
-margin_left = 122.0
+margin_left = 90.0
 margin_top = -5.0
-margin_right = 146.0
+margin_right = 114.0
 margin_bottom = 19.0
 
-[node name="Label" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved/Xcheck"]
-margin_left = -5.0
-margin_top = 5.0
-margin_right = 35.0
-margin_bottom = 19.0
-text = "X"
+[node name="IAmp" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
+margin_top = 376.0
+margin_right = 73.0
+margin_bottom = 436.0
+rect_min_size = Vector2( 0, 60 )
+text = "Interleaved
+Amplitude"
 
-[node name="Ycheck" type="CheckBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved" groups=["checks"]]
-margin_left = 186.0
+[node name="XSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp" groups=["sliders"]]
+margin_left = 75.0
+margin_top = -2.0
+margin_right = 475.0
+margin_bottom = 14.0
+min_value = -1.0
+max_value = 1.0
+step = 0.05
+page = 0.05
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider" groups=["lines"]]
+margin_left = 403.0
 margin_top = -5.0
-margin_right = 210.0
+margin_right = 477.0
 margin_bottom = 19.0
+rect_min_size = Vector2( 30, 24 )
+min_value = -1.0
+max_value = 1.0
+step = 0.05
+page = 0.05
 
-[node name="Label" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved/Ycheck"]
-margin_left = -5.0
-margin_top = 5.0
-margin_right = 35.0
+[node name="YSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp" groups=["sliders"]]
+margin_left = 75.0
+margin_top = 26.0
+margin_right = 475.0
+margin_bottom = 42.0
+min_value = -1.0
+max_value = 1.0
+step = 0.05
+page = 0.05
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider" groups=["lines"]]
+margin_left = 403.0
+margin_top = -5.0
+margin_right = 477.0
 margin_bottom = 19.0
-text = "y
-"
+rect_min_size = Vector2( 30, 24 )
+min_value = -1.0
+max_value = 1.0
+step = 0.05
+page = 0.05
+
+[node name="IFreq" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
+margin_top = 452.0
+margin_right = 73.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 0, 60 )
+text = "Interleaved
+Frequency"
+
+[node name="XSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq" groups=["sliders"]]
+margin_left = 75.0
+margin_right = 475.0
+margin_bottom = 16.0
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider" groups=["lines"]]
+margin_left = 403.0
+margin_top = -5.0
+margin_right = 477.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 24 )
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+
+[node name="YSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq" groups=["sliders"]]
+margin_left = 75.0
+margin_top = 26.0
+margin_right = 475.0
+margin_bottom = 42.0
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider" groups=["lines"]]
+margin_left = 403.0
+margin_top = -5.0
+margin_right = 477.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 24 )
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+
+[node name="IScale" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
+margin_top = 528.0
+margin_right = 73.0
+margin_bottom = 588.0
+rect_min_size = Vector2( 0, 60 )
+text = "Interleaved
+Scale"
+
+[node name="Slider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale" groups=["sliders"]]
+margin_left = 75.0
+margin_top = -2.0
+margin_right = 475.0
+margin_bottom = 14.0
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
+scrollable = false
+
+[node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider" groups=["lines"]]
+margin_left = 403.0
+margin_top = -5.0
+margin_right = 477.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 24 )
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+page = 0.1
 
 [node name="Effects" type="Tabs" parent="TabContainer"]
 visible = false
@@ -751,7 +863,16 @@ current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
 [connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider" to="." method="_on_Slider_value_changed"]
 [connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider/LineEdit" to="." method="_on_LineEdit_value_changed"]
 [connection signal="pressed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved/Xcheck" to="." method="_on_itlXcheck_pressed"]
-[connection signal="pressed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved/Ycheck" to="." method="_on_itlYcheck_pressed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider" to="." method="_on_IAMPXSlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider/LineEdit" to="." method="_on_IAXLineEdit_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider" to="." method="_on_IAMPYSlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider/LineEdit" to="." method="_on_IAYLineEdit_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider" to="." method="_on_IFREQXSlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider/LineEdit" to="." method="_on_IFXLineEdit_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider" to="." method="_on_IFREQYSlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider/LineEdit" to="." method="_on_IFYLineEdit_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider" to="." method="_on_ISSlider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider/LineEdit" to="." method="_on_ISLineEdit_value_changed"]
 [connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider" to="." method="_on_mveXSlider_value_changed"]
 [connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider/LineEdit" to="." method="_on_moveLineEdit_value_changed"]
 [connection signal="value_changed" from="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider" to="." method="_on_moveYSlider_value_changed"]
