@@ -8,39 +8,51 @@ anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 642.0
-margin_bottom = 363.0
+margin_right = 1280.0
+margin_bottom = 720.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Panel"]
-margin_left = 296.0
-margin_top = 19.0
-margin_right = 353.0
-margin_bottom = 36.0
-rect_scale = Vector2( 0.8, 0.8 )
+margin_left = 588.0
+margin_top = 22.0
+margin_right = 645.0
+margin_bottom = 39.0
 text = "fps"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = 22.0
-margin_top = 33.0
-margin_right = 342.0
-margin_bottom = 213.0
+margin_top = 41.0
+margin_right = 662.0
+margin_bottom = 401.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="ColorRect"]
+margin_right = 320.0
+margin_bottom = 180.0
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 1
+mouse_default_cursor_shape = 3
+
+[node name="Viewport" type="Viewport" parent="ColorRect/ViewportContainer"]
+size = Vector2( 320, 180 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+gui_snap_controls_to_pixels = false
 
 [node name="ItemList" type="ItemList" parent="."]
 margin_left = 22.0
-margin_top = 219.0
-margin_right = 344.0
-margin_bottom = 346.0
+margin_top = 411.0
+margin_right = 662.0
+margin_bottom = 689.0
 
 [node name="TabContainer" type="TabContainer" parent="."]
-margin_left = 359.0
-margin_top = 8.0
-margin_right = 622.0
-margin_bottom = 345.0
+margin_left = 690.0
+margin_top = 16.0
+margin_right = 1255.0
+margin_bottom = 690.0
 
 [node name="Layer" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -50,33 +62,33 @@ margin_bottom = -4.0
 rect_pivot_offset = Vector2( 200, 105 )
 
 [node name="Open" type="Button" parent="TabContainer/Layer" groups=["buttons"]]
-margin_left = 145.0
-margin_top = 36.0
-margin_right = 236.0
-margin_bottom = 56.0
+margin_left = 291.0
+margin_top = 35.0
+margin_right = 473.0
+margin_bottom = 75.0
 text = "Open"
 
 [node name="Panel" type="Panel" parent="TabContainer/Layer"]
-margin_left = 9.0
+margin_left = 10.0
 margin_top = 33.0
-margin_right = 142.0
-margin_bottom = 110.0
+margin_right = 276.0
+margin_bottom = 187.0
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="TabContainer/Layer"]
-margin_left = 11.0
-margin_top = 35.0
-margin_right = 331.0
-margin_bottom = 215.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = 10.0
+margin_top = 34.0
+margin_right = 323.0
+margin_bottom = 214.0
+rect_scale = Vector2( 0.85, 0.85 )
 expand = true
 stretch_mode = 2
 
 [node name="LineEdit" type="LineEdit" parent="TabContainer/Layer"]
-margin_left = 70.0
-margin_top = 3.0
-margin_right = 236.0
-margin_bottom = 27.0
+margin_left = 71.0
+margin_top = 4.0
+margin_right = 276.0
+margin_bottom = 28.0
 
 [node name="Label" type="Label" parent="TabContainer/Layer/LineEdit"]
 margin_left = -59.0
@@ -86,10 +98,10 @@ margin_bottom = 19.0
 text = "Name:"
 
 [node name="FileDialog" type="FileDialog" parent="TabContainer/Layer/LineEdit"]
-margin_left = -350.0
-margin_top = 5.0
-margin_right = 130.0
-margin_bottom = 272.0
+margin_left = -74.0
+margin_top = -10.0
+margin_right = 486.0
+margin_bottom = 641.0
 window_title = "Open a File"
 resizable = true
 mode = 0
@@ -99,23 +111,22 @@ current_dir = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer"
 current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
 
 [node name="Remove" type="Button" parent="TabContainer/Layer" groups=["buttons"]]
-margin_left = 145.0
-margin_top = 275.0
-margin_right = 247.0
-margin_bottom = 295.0
+margin_left = 339.0
+margin_top = 585.0
+margin_right = 543.0
+margin_bottom = 625.0
 text = "Remove Layer"
 
 [node name="Opacity" type="Label" parent="TabContainer/Layer"]
-margin_left = 11.0
-margin_top = 129.0
-margin_right = 84.0
-margin_bottom = 169.0
-rect_min_size = Vector2( 0, 40 )
+margin_left = 9.0
+margin_top = 209.0
+margin_right = 155.0
+margin_bottom = 249.0
 text = "Opacity"
 
-[node name="Slider" type="HSlider" parent="TabContainer/Layer/Opacity"]
+[node name="Slider" type="HSlider" parent="TabContainer/Layer/Opacity" groups=["sliders"]]
 margin_left = 55.0
-margin_right = 149.0
+margin_right = 382.0
 margin_bottom = 16.0
 max_value = 1.01
 step = 0.01
@@ -124,9 +135,9 @@ value = 1.0
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Layer/Opacity/Slider" groups=["lines"]]
-margin_left = 96.0
+margin_left = 331.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 479.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 max_value = 1.01
@@ -144,8 +155,8 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Distortion"]
-margin_right = 256.0
-margin_bottom = 305.0
+margin_right = 547.0
+margin_bottom = 632.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Distortion/ScrollContainer"]
 margin_right = 73.0
@@ -212,12 +223,13 @@ margin_top = 112.0
 margin_right = 73.0
 margin_bottom = 172.0
 rect_min_size = Vector2( 0, 60 )
-text = "Amplitude"
+text = "
+Amplitude"
 
 [node name="XSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp" groups=["sliders"]]
 margin_left = 71.0
 margin_top = -2.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 14.0
 min_value = -10.0
 max_value = 10.0
@@ -226,9 +238,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 403.0
 margin_top = -5.0
-margin_right = 186.0
+margin_right = 477.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -239,7 +251,7 @@ page = 0.1
 [node name="YSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 26.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 42.0
 min_value = -10.0
 max_value = 10.0
@@ -248,9 +260,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 403.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 477.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -263,12 +275,13 @@ margin_top = 188.0
 margin_right = 73.0
 margin_bottom = 248.0
 rect_min_size = Vector2( 0, 60 )
-text = "Frequency "
+text = "
+Frequency "
 
 [node name="XSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq" groups=["sliders"]]
 margin_left = 71.0
 margin_top = -2.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 14.0
 min_value = -10.0
 max_value = 10.0
@@ -277,9 +290,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 403.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 477.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -290,7 +303,7 @@ page = 0.1
 [node name="YSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 26.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 42.0
 min_value = -10.0
 max_value = 10.0
@@ -299,9 +312,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 403.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 477.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -319,7 +332,7 @@ text = "Scale"
 [node name="Slider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 5.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 21.0
 min_value = -10.0
 max_value = 10.0
@@ -328,9 +341,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 403.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 477.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -373,6 +386,7 @@ text = "y
 "
 
 [node name="Effects" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -381,16 +395,16 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Effects"]
-margin_right = 256.0
-margin_bottom = 302.0
+margin_right = 557.0
+margin_bottom = 636.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Effects/ScrollContainer"]
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 499.0
 custom_constants/separation = 16
 
 [node name="Move" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 70, 60 )
 text = "
@@ -399,7 +413,7 @@ Move"
 [node name="XSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 5.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 21.0
 min_value = -10.0
 max_value = 10.0
@@ -408,9 +422,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 410.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 484.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -421,7 +435,7 @@ page = 0.1
 [node name="YSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 33.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 49.0
 min_value = -10.0
 max_value = 10.0
@@ -430,9 +444,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 410.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 484.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -442,56 +456,60 @@ page = 0.1
 
 [node name="Ping" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 76.0
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 106.0
 rect_min_size = Vector2( 70, 30 )
 text = "Ping pong"
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Ping" groups=["checks"]]
-margin_left = 73.0
-margin_top = -4.0
-margin_right = 97.0
-margin_bottom = 20.0
+margin_left = 64.0
+margin_top = -6.0
+margin_right = 88.0
+margin_bottom = 18.0
 
 [node name="PalSft" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 122.0
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 153.0
 rect_min_size = Vector2( 70, 30 )
 text = "Pallette
 Shift"
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft" groups=["checks"]]
-margin_left = 73.0
-margin_top = -4.0
-margin_right = 97.0
-margin_bottom = 20.0
+margin_left = 64.0
+margin_top = -6.0
+margin_right = 88.0
+margin_bottom = 18.0
 
 [node name="Pal" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 169.0
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 209.0
 rect_min_size = Vector2( 70, 40 )
 text = "Palette"
 
+[node name="Panel" type="Panel" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Pal"]
+margin_left = 71.0
+margin_right = 201.0
+margin_bottom = 40.0
+
 [node name="TextureRect" type="TextureRect" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Pal"]
-margin_left = 68.0
-margin_top = -4.0
-margin_right = 187.0
-margin_bottom = 30.0
+margin_left = 71.0
+margin_right = 201.0
+margin_bottom = 39.0
 expand = true
 stretch_mode = 1
 
 [node name="Button" type="Button" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Pal/TextureRect" groups=["buttons"]]
-margin_left = 124.0
-margin_top = 7.0
-margin_right = 171.0
-margin_bottom = 27.0
+margin_left = 140.0
+margin_top = 4.0
+margin_right = 214.0
+margin_bottom = 34.0
 text = "Open"
 
 [node name="PalSpd" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 225.0
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 265.0
 rect_min_size = Vector2( 70, 40 )
 text = "Palette
@@ -500,7 +518,7 @@ Speed"
 [node name="Slider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 5.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 21.0
 min_value = -5.0
 max_value = 5.0
@@ -509,9 +527,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 410.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 484.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -5.0
@@ -521,20 +539,20 @@ page = 0.1
 
 [node name="Brl" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 281.0
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 311.0
 rect_min_size = Vector2( 70, 30 )
 text = "FishEye"
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Brl" groups=["checks"]]
-margin_left = 73.0
-margin_top = -4.0
-margin_right = 97.0
-margin_bottom = 20.0
+margin_left = 64.0
+margin_top = -6.0
+margin_right = 88.0
+margin_bottom = 18.0
 
 [node name="FEPos" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 327.0
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 387.0
 rect_min_size = Vector2( 70, 60 )
 text = "
@@ -544,7 +562,7 @@ Posiion"
 [node name="XSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 5.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 21.0
 min_value = -10.0
 max_value = 10.0
@@ -553,9 +571,9 @@ page = 0.05
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 410.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 484.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -566,7 +584,7 @@ page = 0.1
 [node name="YSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 33.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 49.0
 min_value = -10.0
 max_value = 10.0
@@ -575,9 +593,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 410.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 484.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -587,7 +605,7 @@ page = 0.1
 
 [node name="FEEfct" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 403.0
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 443.0
 rect_min_size = Vector2( 70, 40 )
 text = "FishEye
@@ -596,7 +614,7 @@ Effect"
 [node name="Slider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 5.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 21.0
 min_value = -10.0
 max_value = 10.0
@@ -605,9 +623,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 410.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 484.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -617,16 +635,16 @@ page = 0.1
 
 [node name="FEScale" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 459.0
-margin_right = 72.0
+margin_right = 70.0
 margin_bottom = 499.0
 rect_min_size = Vector2( 70, 40 )
 text = "FishEye
-Effect Scale"
+Scale"
 
 [node name="Slider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale" groups=["sliders"]]
 margin_left = 71.0
 margin_top = 5.0
-margin_right = 179.0
+margin_right = 471.0
 margin_bottom = 21.0
 min_value = -10.0
 max_value = 10.0
@@ -635,9 +653,9 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider" groups=["lines"]]
-margin_left = 112.0
+margin_left = 410.0
 margin_top = -5.0
-margin_right = 170.0
+margin_right = 484.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
@@ -646,11 +664,11 @@ step = 0.1
 page = 0.1
 
 [node name="palFileDialog" type="FileDialog" parent="TabContainer/Effects"]
-margin_left = -308.0
-margin_top = 6.0
-margin_right = 226.0
-margin_bottom = 272.0
+margin_top = -3.0
+margin_right = 566.0
+margin_bottom = 655.0
 window_title = "Open a File"
+resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png" )
@@ -659,9 +677,9 @@ current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 22.0
-margin_top = 4.0
+margin_top = 13.0
 margin_right = 226.0
-margin_bottom = 24.0
+margin_bottom = 33.0
 
 [node name="NewBG" type="Button" parent="HBoxContainer"]
 margin_right = 63.0
@@ -688,10 +706,10 @@ margin_bottom = 20.0
 text = "New Layer"
 
 [node name="FileDialog" type="FileDialog" parent="."]
-margin_left = 55.0
+margin_left = 691.0
 margin_top = 22.0
-margin_right = 571.0
-margin_bottom = 315.0
+margin_right = 1266.0
+margin_bottom = 717.0
 window_title = "Save Background"
 resizable = true
 access = 2
@@ -700,10 +718,10 @@ current_dir = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer"
 current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
 
 [node name="FileDialog2" type="FileDialog" parent="."]
-margin_left = 55.0
+margin_left = 691.0
 margin_top = 22.0
-margin_right = 571.0
-margin_bottom = 315.0
+margin_right = 1268.0
+margin_bottom = 704.0
 window_title = "Open a File"
 resizable = true
 mode = 0
