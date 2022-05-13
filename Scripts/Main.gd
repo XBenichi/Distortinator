@@ -17,6 +17,11 @@ var layer = {
 	"palette_shifting": false,
 	"Xinterleaved":false,
 	"Yinterleaved":false,
+	"fisheye": false,
+	"fisheyeX": 0,
+	"fisheyeY": 0,
+	"fisheyescale": 0,
+	"fisheyeeffect": 0,
 }
 
 var currentLayerIndex = -1
@@ -27,7 +32,7 @@ var layers = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	OS.set_window_title("Distortinator 1.0")
+	OS.set_window_title("Distortinator 1.3")
 	
 	$TabContainer/Layer/LineEdit.editable = false
 	for sliders in get_tree().get_nodes_in_group("sliders"):
@@ -273,7 +278,7 @@ func _on_New_pressed():
 		#textNode.material.set("shader_param/frequency",Vector2(1,1))
 		textNode.material = textNode.material.duplicate()
 		currentLayer = null
-		$ColorRect.add_child(textNode)
+		$ColorRect/ViewportContainer/Viewport.add_child(textNode)
 		currentLayer = textNode
 		for sliders in get_tree().get_nodes_in_group("sliders"):
 			sliders.value = 0
@@ -317,6 +322,13 @@ func changeLayer():
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider.value = layers[currentLayerIndex].palette_shifting_speed
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/Ping/CheckBox.pressed = layers[currentLayerIndex].ping_pong
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft/CheckBox.pressed = layers[currentLayerIndex].palette_shifting
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Brl/CheckBox.pressed = layers[currentLayerIndex].fisheye
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider.value = layers[currentLayerIndex].fisheyeX
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider.value = layers[currentLayerIndex].fisheyeY
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider.value = layers[currentLayerIndex].fisheyeeffect
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider.value = layers[currentLayerIndex].fisheyescale
+	
+	
 	if layers[currentLayerIndex].image != null:
 		$TabContainer/Layer/TextureRect.texture = str2var(layers[currentLayerIndex].image)
 		if layers[currentLayerIndex].palette != null:
@@ -335,8 +347,8 @@ func _on_NewBG_pressed():
 
 
 func _on_ConfirmationDialog_confirmed():
-	for n in $ColorRect.get_children():
-		$ColorRect.remove_child(n)
+	for n in $ColorRect/ViewportContainer/Viewport.get_children():
+		$ColorRect/ViewportContainer/Viewport.remove_child(n)
 		n.queue_free()
 		$ItemList.clear()
 		layers.clear()
@@ -371,8 +383,8 @@ func _on_OpenFileDialog_file_selected(path):
 
 
 func createBackground():
-	for n in $ColorRect.get_children():
-		$ColorRect.remove_child(n)
+	for n in $ColorRect/ViewportContainer/Viewport.get_children():
+		$ColorRect/ViewportContainer/Viewport.remove_child(n)
 		n.queue_free()
 		$ItemList.clear()
 		layers.clear()
@@ -386,7 +398,7 @@ func createBackground():
 		textNode.material = textNode.material.duplicate()
 		currentLayer = null
 		
-		$ColorRect.add_child(textNode)
+		$ColorRect/ViewportContainer/Viewport.add_child(textNode)
 		currentLayer = textNode
 		for sliders in get_tree().get_nodes_in_group("sliders"):
 			sliders.value = 0
@@ -446,7 +458,7 @@ func _on_Save_pressed():
 
 func _on_Remove_pressed():
 	var n = layers[currentLayerIndex].node
-	$ColorRect.remove_child(n)
+	$ColorRect/ViewportContainer/Viewport.remove_child(n)
 	n.queue_free()
 	layers.remove(currentLayerIndex)
 	$ItemList.remove_item(currentLayerIndex)
@@ -465,7 +477,12 @@ func _on_Remove_pressed():
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/Ping/CheckBox.pressed = layers[currentLayerIndex].ping_pong
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft/CheckBox.pressed = layers[currentLayerIndex].palette_shifting
 	$TabContainer/Layer/LineEdit.text = layers[currentLayerIndex].name
-
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Brl/CheckBox.pressed = layers[currentLayerIndex].fisheye
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider.value = layers[currentLayerIndex].fisheyeX
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider.value = layers[currentLayerIndex].fisheyeY
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider.value = layers[currentLayerIndex].fisheyeeffect
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider.value = layers[currentLayerIndex].fisheyescale
+	
 
 func _on_ItemList_item_selected(index):
 	for i in layers.size():
@@ -479,35 +496,35 @@ func _on_FECheckBox_pressed():
 	var onoff = currentLayer.material.get("shader_param/barrel")
 	if $TabContainer/Effects/ScrollContainer/VBoxContainer/Brl/CheckBox.pressed == true:
 		currentLayer.material.set("shader_param/barrel",1)
-		layers[currentLayerIndex].palette_shifting = true
+		layers[currentLayerIndex].fisheye = true
 	else:
 		currentLayer.material.set("shader_param/barrel",0)
-		layers[currentLayerIndex].palette_shifting = false
+		layers[currentLayerIndex].fisheye = false
 
 
 func _on_FEPOSXSlider_value_changed(value):
 	currentLayer.material.set("shader_param/barrelxy",Vector2(value,$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider.value))
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider/LineEdit.value = value
-	layers[currentLayerIndex].barrelxy = currentLayer.material.get("shader_param/barrelxy")
+	var vec2 = currentLayer.material.get("shader_param/barrelxy")
+	layers[currentLayerIndex].fisheyeX = vec2.x
 
 
 func _on_FEPOSYSlider_value_changed(value):
 	currentLayer.material.set("shader_param/barrelxy",Vector2($TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider.value,value))
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider/LineEdit.value = value
-	layers[currentLayerIndex].barrelxy = currentLayer.material.get("shader_param/barrelxy")
-
-
+	var vec2 = currentLayer.material.get("shader_param/barrelxy")
+	layers[currentLayerIndex].fisheyeY = vec2.y
 func _on_FEESlider_value_changed(value):
 	currentLayer.material.set("shader_param/effect",value)
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider/LineEdit.value = value
-	layers[currentLayerIndex].scale = currentLayer.material.get("shader_param/effect")
+	layers[currentLayerIndex].fisheyeeffect = currentLayer.material.get("shader_param/effect")
 
 
 
 func _on_FESSlider_value_changed(value):
 	currentLayer.material.set("shader_param/effect_scale",value)
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider/LineEdit.value = value
-	layers[currentLayerIndex].scale = currentLayer.material.get("shader_param/effect_scale")
+	layers[currentLayerIndex].fisheyescale = currentLayer.material.get("shader_param/effect_scale")
 
 func _on_FEPOSLineEdit_value_changed(value):
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider.value = value
