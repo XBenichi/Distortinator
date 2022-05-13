@@ -7,21 +7,28 @@ var layer = {
 	"opacity": 255,
 	"horizontal_distortion": 0.0,
 	"vertical_distortion": 0.0,
-	"amplitude": Vector2(0,0),
-	"frequency": Vector2(1,1),
+	"amplitudeX": 0.0,
+	"amplitudeY": 0.0,
+	"frequencyX": 0.0,
+	"frequencyY": 0.0,
 	"scale": 0.0,
-	"move": Vector2(0,0),
+	"moveX": 0.0,
+	"moveY": 0.0,
 	"ping_pong": false,
 	"palette_shifting_speed": 0,
 	"palette": null,
 	"palette_shifting": false,
-	"Xinterleaved":false,
-	"Yinterleaved":false,
+	"interleaved":false,
+	"interleaved_amplitudeX":0.0,
+	"interleaved_amplitudeY":0.0,
+	"interleaved_frequencyX":0.0,
+	"interleaved_frequencyY":0.0,
+	"interleaved_scale":0.0,
 	"fisheye": false,
-	"fisheyeX": 0,
-	"fisheyeY": 0,
-	"fisheyescale": 0,
-	"fisheyeeffect": 0,
+	"fisheyeX": 0.0,
+	"fisheyeY": 0.0,
+	"fisheyescale": 0.0,
+	"fisheyeeffect": 0.0,
 }
 
 var currentLayerIndex = -1
@@ -32,7 +39,7 @@ var layers = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	OS.set_window_title("Distortinator 1.3")
+	OS.set_window_title("Distortinator 1.4")
 	
 	$TabContainer/Layer/LineEdit.editable = false
 	for sliders in get_tree().get_nodes_in_group("sliders"):
@@ -74,13 +81,14 @@ func _on_FileDialog_file_selected(path):
 func _on_AmpXSlider_value_changed(value):
 	currentLayer.material.set("shader_param/amplitude",Vector2(value,$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider.value))
 	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider/LineEdit.value = value
-	layers[currentLayerIndex].amplitude = currentLayer.material.get("shader_param/amplitude")
-
+	var vec2 = currentLayer.material.get("shader_param/amplitude")
+	layers[currentLayerIndex].amplitudeX = vec2.x
+	
 func _on_ampYSlider_value_changed(value):
 	currentLayer.material.set("shader_param/amplitude",Vector2($TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider.value,value))
 	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider/LineEdit.value = value
-	layers[currentLayerIndex].amplitude = currentLayer.material.get("shader_param/amplitude")
-
+	var vec2 = currentLayer.material.get("shader_param/amplitude")
+	layers[currentLayerIndex].amplitudeY = vec2.y
 
 
 func _on_XCheckBox_pressed():
@@ -125,14 +133,14 @@ func _on_VDYCheckBox_pressed():
 func _on_frqXSlider_value_changed(value):
 	currentLayer.material.set("shader_param/frequency",Vector2(value,$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider.value))
 	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider/LineEdit.value = value
+	var vec2 = currentLayer.material.get("shader_param/frequency")
+	layers[currentLayerIndex].frequencyX = vec2.x
 	
-	layers[currentLayerIndex].frequency = currentLayer.material.get("shader_param/frequency")
-
 func _on_frqYSlider_value_changed(value):
 	currentLayer.material.set("shader_param/frequency",Vector2($TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider.value,value))
 	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider/LineEdit.value = value
-	layers[currentLayerIndex].frequency = currentLayer.material.get("shader_param/frequency")
-
+	var vec2 = currentLayer.material.get("shader_param/frequency")
+	layers[currentLayerIndex].frequencyY = vec2.y
 
 func _on_Slider_value_changed(value):
 	currentLayer.material.set("shader_param/scale",value)
@@ -151,41 +159,28 @@ func _on_AlphaLineEdit_value_changed(value):
 func _on_itlXcheck_pressed():
 	var onoff = currentLayer.material.get("shader_param/interleaved")
 	if $TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved/Xcheck.pressed == true:
-		if onoff == 0 or onoff == 2:
-			currentLayer.material.set("shader_param/interleaved",1)
-			layers[currentLayerIndex].Xinterleaved = true
+		currentLayer.material.set("shader_param/interleaved",1)
+		layers[currentLayerIndex].interleaved = true
 	else:
 		currentLayer.material.set("shader_param/interleaved",0)
-		layers[currentLayerIndex].Xinterleaved = false
-		layers[currentLayerIndex].Yinterleaved = false
+		layers[currentLayerIndex].interleaved = false
 	
 	
 
-
-func _on_itlYcheck_pressed():
-	var onoff = currentLayer.material.get("shader_param/interleaved")
-	if $TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved/Ycheck.pressed == true:
-		if onoff == 0 or onoff == 1:
-			currentLayer.material.set("shader_param/interleaved",2)
-			layers[currentLayerIndex].Yinterleaved = true
-	else:
-		currentLayer.material.set("shader_param/interleaved",0)
-		layers[currentLayerIndex].Yinterleaved = false
-		layers[currentLayerIndex].Xinterleaved = true
-	
 
 
 func _on_mveXSlider_value_changed(value):
 	currentLayer.material.set("shader_param/move",Vector2(value,$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider.value))
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider/LineEdit.value = value
-	layers[currentLayerIndex].move = currentLayer.material.get("shader_param/move")
-
+	var vec2 = currentLayer.material.get("shader_param/move")
+	layers[currentLayerIndex].moveX = vec2.x
 
 func _on_moveYSlider_value_changed(value):
 	currentLayer.material.set("shader_param/move",Vector2($TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider.value,value))
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider/LineEdit.value = value
-	layers[currentLayerIndex].move = currentLayer.material.get("shader_param/move")
-	
+	var vec2 = currentLayer.material.get("shader_param/move")
+	layers[currentLayerIndex].moveY = vec2.y
+
 func _on_palSlider_value_changed(value):
 	currentLayer.material.set("shader_param/palette_shifting_speed",value)
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider/LineEdit.value = value
@@ -312,13 +307,13 @@ func changeLayer():
 	currentLayer = layers[currentLayerIndex].node
 	
 	$TabContainer/Layer/Opacity/Slider.value = layers[currentLayerIndex].opacity
-	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider.value = layers[currentLayerIndex].amplitude.x
-	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider.value = layers[currentLayerIndex].amplitude.y
-	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider.value = layers[currentLayerIndex].frequency.x
-	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider.value = layers[currentLayerIndex].frequency.y
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider.value = layers[currentLayerIndex].amplitudeX
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider.value = layers[currentLayerIndex].amplitudeY
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider.value = layers[currentLayerIndex].frequencyX
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider.value = layers[currentLayerIndex].frequencyY
 	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider.value = layers[currentLayerIndex].scale
-	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider.value = layers[currentLayerIndex].move.x
-	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider.value = layers[currentLayerIndex].move.y
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider.value = layers[currentLayerIndex].moveX
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider.value = layers[currentLayerIndex].moveY
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider.value = layers[currentLayerIndex].palette_shifting_speed
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/Ping/CheckBox.pressed = layers[currentLayerIndex].ping_pong
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft/CheckBox.pressed = layers[currentLayerIndex].palette_shifting
@@ -327,7 +322,11 @@ func changeLayer():
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider.value = layers[currentLayerIndex].fisheyeY
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider.value = layers[currentLayerIndex].fisheyeeffect
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider.value = layers[currentLayerIndex].fisheyescale
-	
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider.value = layers[currentLayerIndex].interleaved_scale
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider.value = layers[currentLayerIndex].interleaved_frequencyY
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider.value = layers[currentLayerIndex].interleaved_frequencyX
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider.value = layers[currentLayerIndex].interleaved_amplitudeX
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider.value = layers[currentLayerIndex].interleaved_amplitudeY
 	
 	if layers[currentLayerIndex].image != null:
 		$TabContainer/Layer/TextureRect.texture = str2var(layers[currentLayerIndex].image)
@@ -438,6 +437,11 @@ func createBackground():
 		$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider.value = layers[currentLayerIndex].palette_shifting_speed
 		$TabContainer/Effects/ScrollContainer/VBoxContainer/Ping/CheckBox.pressed = layers[currentLayerIndex].ping_pong
 		$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft/CheckBox.pressed = layers[currentLayerIndex].palette_shifting
+		$TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider.value = layers[currentLayerIndex].interleaved_scale
+		$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider.value = layers[currentLayerIndex].interleaved_frequency.y
+		$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider.value = layers[currentLayerIndex].interleaved_frequency.x
+		$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider.value = layers[currentLayerIndex].interleaved_amplitude.x
+		$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider.value = layers[currentLayerIndex].interleaved_amplitude.y
 		if layers[currentLayerIndex].image != null:
 			textNode.texture = str2var(layers[currentLayerIndex].image)
 			$TabContainer/Layer/TextureRect.texture = str2var(layers[currentLayerIndex].image)
@@ -466,13 +470,13 @@ func _on_Remove_pressed():
 	currentLayer = layers[currentLayerIndex].node
 	#$Tree.get_selected().get_parent().remove_child($Tree.get_selected())
 	$TabContainer/Layer/Opacity/Slider.value = layers[currentLayerIndex].opacity
-	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider.value = layers[currentLayerIndex].amplitude.x
-	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider.value = layers[currentLayerIndex].amplitude.y
-	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider.value = layers[currentLayerIndex].frequency.x
-	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider.value = layers[currentLayerIndex].frequency.y
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider.value = layers[currentLayerIndex].amplitudeX
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider.value = layers[currentLayerIndex].amplitudeY
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider.value = layers[currentLayerIndex].frequencyX
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider.value = layers[currentLayerIndex].frequencyY
 	$TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider.value = layers[currentLayerIndex].scale
-	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider.value = layers[currentLayerIndex].move.x
-	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider.value = layers[currentLayerIndex].move.y
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider.value = layers[currentLayerIndex].moveX
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider.value = layers[currentLayerIndex].moveY
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider.value = layers[currentLayerIndex].palette_shifting_speed
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/Ping/CheckBox.pressed = layers[currentLayerIndex].ping_pong
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft/CheckBox.pressed = layers[currentLayerIndex].palette_shifting
@@ -482,8 +486,11 @@ func _on_Remove_pressed():
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider.value = layers[currentLayerIndex].fisheyeY
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider.value = layers[currentLayerIndex].fisheyeeffect
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider.value = layers[currentLayerIndex].fisheyescale
-	
-
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider.value = layers[currentLayerIndex].interleaved_scale
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider.value = layers[currentLayerIndex].interleaved_frequencyY
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider.value = layers[currentLayerIndex].interleaved_frequencyX
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider.value = layers[currentLayerIndex].interleaved_amplitudeX
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider.value = layers[currentLayerIndex].interleaved_amplitudeY
 func _on_ItemList_item_selected(index):
 	for i in layers.size():
 		if layers[i].name == $ItemList.get_item_text(index):
@@ -520,11 +527,43 @@ func _on_FEESlider_value_changed(value):
 	layers[currentLayerIndex].fisheyeeffect = currentLayer.material.get("shader_param/effect")
 
 
+func _on_IAMPXSlider_value_changed(value):
+	currentLayer.material.set("shader_param/i_amplitude",Vector2(value,$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider.value))
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider/LineEdit.value = value
+	var vec2 = currentLayer.material.get("shader_param/i_amplitude")
+	layers[currentLayerIndex].interleaved_amplitudeX = vec2.x
+	
+func _on_IAMPYSlider_value_changed(value):
+	currentLayer.material.set("shader_param/i_amplitude",Vector2($TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider.value,value))
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider/LineEdit.value = value
+	var vec2 = currentLayer.material.get("shader_param/i_amplitude")
+	layers[currentLayerIndex].interleaved_amplitudeY = vec2.y
+
+func _on_IFREQXSlider_value_changed(value):
+	currentLayer.material.set("shader_param/i_frequency",Vector2(value,$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider.value))
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider/LineEdit.value = value
+	var vec2 = currentLayer.material.get("shader_param/i_frequency")
+	layers[currentLayerIndex].interleaved_frequencyX = vec2.x
+
+
+
+func _on_IFREQYSlider_value_changed(value):
+	currentLayer.material.set("shader_param/i_frequency",Vector2($TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider.value,value))
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider/LineEdit.value = value
+	var vec2 = currentLayer.material.get("shader_param/i_frequency")
+	layers[currentLayerIndex].interleaved_frequencyY = vec2.y
+
+func _on_ISSlider_value_changed(value):
+	currentLayer.material.set("shader_param/i_scale",value)
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider/LineEdit.value = value
+	layers[currentLayerIndex].interleaved_scale = currentLayer.material.get("shader_param/i_scale")
 
 func _on_FESSlider_value_changed(value):
 	currentLayer.material.set("shader_param/effect_scale",value)
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider/LineEdit.value = value
 	layers[currentLayerIndex].fisheyescale = currentLayer.material.get("shader_param/effect_scale")
+
+
 
 func _on_FEPOSLineEdit_value_changed(value):
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider.value = value
@@ -540,3 +579,22 @@ func _on_FEELineEdit_value_changed(value):
 
 func _on_FESLineEdit_value_changed(value):
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider.value = value
+
+func _on_ISLineEdit_value_changed(value):
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider.value = value
+
+
+func _on_IFYLineEdit_value_changed(value):
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider.value = value
+
+
+func _on_IFXLineEdit_value_changed(value):
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider.value = value
+
+
+func _on_IAYLineEdit_value_changed(value):
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider.value = value
+
+
+func _on_IAXLineEdit_value_changed(value):
+	$TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider.value = value
