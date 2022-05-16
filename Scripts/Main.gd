@@ -56,7 +56,7 @@ func _ready():
 
 
 func _process(delta):
-	$Panel/Label.text = ("FPS:" + var2str(Engine.get_frames_per_second()))
+	$HBoxContainer/FPSLabel.text = ("FPS:" + var2str(Engine.get_frames_per_second()))
 
 
 func _on_imageOpen_pressed():
@@ -185,6 +185,8 @@ func _on_palSlider_value_changed(value):
 	currentLayer.material.set("shader_param/palette_shifting_speed",value)
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider/LineEdit.value = value
 	layers[currentLayerIndex].palette_shifting_speed = currentLayer.material.get("shader_param/palette_shifting_speed")
+	# set palette shift demo as well
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalDemo/TextureRect.material.set_shader_param("palette_shifting_speed", value)
 
 func _on_CheckBox_pressed():
 	var onoff = currentLayer.material.get("shader_param/ping_pong")
@@ -201,12 +203,14 @@ func _on_palCheckBox_pressed():
 	var onoff = currentLayer.material.get("shader_param/palette_shifting")
 	if $TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft/CheckBox.pressed == true:
 		currentLayer.material.set("shader_param/palette_shifting",1)
+		# set palette shift demo as well
+		$TabContainer/Effects/ScrollContainer/VBoxContainer/PalDemo/TextureRect.material.set_shader_param("palette_shifting_speed", 1)
 		layers[currentLayerIndex].palette_shifting = true
 	else:
 		currentLayer.material.set("shader_param/palette_shifting",0)
+		# set palette shift demo as well
+		$TabContainer/Effects/ScrollContainer/VBoxContainer/PalDemo/TextureRect.material.set_shader_param("palette_shifting_speed", 0)
 		layers[currentLayerIndex].palette_shifting = false
-	
-
 
 
 func _on_ampxLineEdit_value_changed(value):
@@ -259,6 +263,9 @@ func _on_palFileDialog_file_selected(path):
 	layers[currentLayerIndex].palette = var2str(image_texture)
 	$TabContainer/Effects/ScrollContainer/VBoxContainer/Pal/TextureRect.texture = image_texture
 	
+	# set palette shift demo as well
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalDemo/TextureRect.texture = image_texture
+	$TabContainer/Effects/ScrollContainer/VBoxContainer/PalDemo/TextureRect.material.set_shader_param("palette", image_texture)
 
 
 

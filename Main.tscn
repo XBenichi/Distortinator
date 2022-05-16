@@ -1,95 +1,139 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://Shaders/Video Drug.shader" type="Shader" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/horizontal_distortion = null
+shader_param/vertical_distortion = null
+shader_param/amplitude = Vector2( 0, 0 )
+shader_param/frequency = Vector2( 0, 0 )
+shader_param/scale = 0.0
+shader_param/move = Vector2( 0, 0 )
+shader_param/ping_pong = null
+shader_param/palette_shifting_speed = 0.0
+shader_param/palette_shifting = null
+shader_param/interleaved = null
+shader_param/screen_height = 180.0
+shader_param/screen_width = 320.0
+shader_param/barrel = false
+shader_param/effect = 1.0
+shader_param/effect_scale = 2.0
+shader_param/barrelxy = Vector2( 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/horizontal_distortion = null
+shader_param/vertical_distortion = null
+shader_param/amplitude = Vector2( 0, 0 )
+shader_param/frequency = Vector2( 0, 0 )
+shader_param/scale = 0.0
+shader_param/move = Vector2( 0, 0 )
+shader_param/ping_pong = null
+shader_param/palette_shifting_speed = 0.0
+shader_param/palette_shifting = true
+shader_param/interleaved = null
+shader_param/screen_height = 180.0
+shader_param/screen_width = 320.0
+shader_param/barrel = false
+shader_param/effect = 1.0
+shader_param/effect_scale = 2.0
+shader_param/barrelxy = Vector2( 1, 1 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_min_size = Vector2( 640, 480 )
 script = ExtResource( 3 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 1280.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
-
-[node name="Label" type="Label" parent="Panel"]
-margin_left = 588.0
-margin_top = 22.0
-margin_right = 645.0
-margin_bottom = 39.0
-text = "fps"
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 22.0
-margin_top = 41.0
-margin_right = 662.0
-margin_bottom = 401.0
+anchor_left = 0.01875
+anchor_top = 0.104167
+anchor_right = 0.51875
+anchor_bottom = 0.479167
+rect_min_size = Vector2( 320, 180 )
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="ViewportContainer" type="ViewportContainer" parent="ColorRect"]
-margin_right = 320.0
-margin_bottom = 180.0
-rect_scale = Vector2( 2, 2 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -90.0
+margin_right = 160.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 320, 180 )
 mouse_filter = 1
 mouse_default_cursor_shape = 3
+stretch = true
 
 [node name="Viewport" type="Viewport" parent="ColorRect/ViewportContainer"]
 size = Vector2( 320, 180 )
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+usage = 0
+render_target_update_mode = 1
+gui_disable_input = true
 gui_snap_controls_to_pixels = false
 
 [node name="ItemList" type="ItemList" parent="."]
-margin_left = 22.0
-margin_top = 411.0
-margin_right = 662.0
-margin_bottom = 689.0
+anchor_left = 0.0171875
+anchor_top = 0.504167
+anchor_right = 0.517187
+anchor_bottom = 0.958333
+margin_left = -1.0
+margin_right = 3.0
+margin_bottom = 2.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="TabContainer" type="TabContainer" parent="."]
-margin_left = 690.0
-margin_top = 16.0
-margin_right = 1255.0
-margin_bottom = 690.0
+anchor_left = 0.539059
+anchor_top = 0.0221905
+anchor_right = 0.980441
+anchor_bottom = 0.958286
+margin_left = 1.87753
+margin_top = 0.63856
+margin_right = 0.0825195
+margin_bottom = 1.31274
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Layer" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
-rect_pivot_offset = Vector2( 200, 105 )
-
-[node name="Open" type="Button" parent="TabContainer/Layer" groups=["buttons"]]
-margin_left = 291.0
-margin_top = 35.0
-margin_right = 473.0
-margin_bottom = 75.0
-text = "Open"
-
-[node name="Panel" type="Panel" parent="TabContainer/Layer"]
-margin_left = 10.0
-margin_top = 33.0
-margin_right = 276.0
-margin_bottom = 187.0
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="TabContainer/Layer"]
-margin_left = 10.0
-margin_top = 34.0
-margin_right = 323.0
-margin_bottom = 214.0
-rect_scale = Vector2( 0.85, 0.85 )
-expand = true
-stretch_mode = 2
+size_flags_horizontal = 3
 
 [node name="LineEdit" type="LineEdit" parent="TabContainer/Layer"]
-margin_left = 71.0
-margin_top = 4.0
-margin_right = 276.0
-margin_bottom = 28.0
+anchor_top = 0.0138807
+anchor_right = 0.850938
+anchor_bottom = 0.0138807
+margin_left = 68.0
+margin_top = -0.216001
+margin_right = -0.0889893
+margin_bottom = 23.784
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Label" type="Label" parent="TabContainer/Layer/LineEdit"]
 margin_left = -59.0
@@ -108,27 +152,53 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png" )
-current_dir = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer"
-current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
+current_dir = "/home/samjs/Distortinator"
+current_path = "/home/samjs/Distortinator/"
 
-[node name="Remove" type="Button" parent="TabContainer/Layer" groups=["buttons"]]
-margin_left = 339.0
-margin_top = 585.0
-margin_right = 543.0
-margin_bottom = 625.0
-text = "Remove Layer"
+[node name="Open" type="Button" parent="TabContainer/Layer" groups=["buttons"]]
+anchor_left = 0.681795
+anchor_top = 0.10558
+anchor_right = 0.989082
+anchor_bottom = 0.15889
+text = "Open"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="TabContainer/Layer"]
+anchor_left = 0.0332728
+anchor_top = 0.107249
+anchor_right = 0.6492
+anchor_bottom = 0.333695
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Layer"]
+anchor_left = 0.0336453
+anchor_top = 0.105645
+anchor_right = 0.649573
+anchor_bottom = 0.332092
+expand = true
+stretch_mode = 2
 
 [node name="Opacity" type="Label" parent="TabContainer/Layer"]
-margin_left = 9.0
-margin_top = 209.0
-margin_right = 155.0
-margin_bottom = 249.0
+anchor_left = 0.0147013
+anchor_top = 0.405911
+anchor_right = 0.953748
+anchor_bottom = 0.439728
 text = "Opacity"
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Slider" type="HSlider" parent="TabContainer/Layer/Opacity" groups=["sliders"]]
-margin_left = 55.0
-margin_right = 382.0
-margin_bottom = 16.0
+anchor_right = 0.734
+anchor_bottom = 1.143
+margin_left = 61.0
+margin_right = 0.0459442
+margin_bottom = -0.00227928
 max_value = 1.01
 step = 0.01
 page = 0.01
@@ -136,63 +206,82 @@ value = 1.0
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Layer/Opacity/Slider" groups=["lines"]]
-margin_left = 331.0
-margin_top = -5.0
-margin_right = 479.0
-margin_bottom = 19.0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_right = 79.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 30, 24 )
 max_value = 1.01
 step = 0.01
 page = 0.01
 value = 1.0
 
+[node name="Remove" type="Button" parent="TabContainer/Layer" groups=["buttons"]]
+anchor_left = 0.626623
+anchor_top = 0.929251
+anchor_right = 0.971055
+anchor_bottom = 0.982562
+text = "Remove Layer"
+
 [node name="Distortion" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+size_flags_horizontal = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Distortion"]
-margin_right = 547.0
-margin_bottom = 632.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Distortion/ScrollContainer"]
-margin_right = 73.0
+margin_right = 272.689
 margin_bottom = 588.0
+size_flags_horizontal = 3
 custom_constants/separation = 16
 
 [node name="Hdistort" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Horizontal
 Distortion"
 
 [node name="XCheckBox" type="CheckBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Hdistort" groups=["checks"]]
-margin_left = 103.0
-margin_right = 127.0
-margin_bottom = 24.0
+anchor_right = 0.233456
+anchor_bottom = 0.6
+margin_left = 105.083
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Vdistort" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
 margin_top = 56.0
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 0, 40 )
 text = "Vertical
 Distortion"
 
 [node name="XCheckBox" type="CheckBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Vdistort" groups=["checks"]]
-margin_left = 106.0
-margin_top = -2.0
-margin_right = 130.0
-margin_bottom = 22.0
+anchor_top = -0.05
+anchor_right = 0.238971
+anchor_bottom = 0.5
+margin_left = 108.143
+margin_bottom = 2.0
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Label" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Vdistort/XCheckBox"]
@@ -203,12 +292,14 @@ margin_bottom = 20.0
 text = "X"
 
 [node name="YCheckBox2" type="CheckBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Vdistort" groups=["checks"]]
-margin_left = 184.0
-margin_top = -2.0
-margin_right = 208.0
-margin_bottom = 22.0
+anchor_top = -0.05
+anchor_right = 0.382353
+anchor_bottom = 0.5
+margin_left = 187.72
+margin_bottom = 2.0
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Label" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Vdistort/YCheckBox2"]
@@ -220,282 +311,370 @@ text = "Y"
 
 [node name="Amp" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
 margin_top = 112.0
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 172.0
 rect_min_size = Vector2( 0, 60 )
 text = "
 Amplitude"
 
 [node name="XSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp" groups=["sliders"]]
-margin_left = 71.0
-margin_top = -2.0
-margin_right = 471.0
-margin_bottom = 14.0
+anchor_top = 0.24
+anchor_right = 0.80459
+anchor_bottom = 0.506405
+margin_left = 74.0
+margin_top = -0.0160007
+margin_right = -0.938721
+margin_bottom = -0.000282288
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/XSlider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.03333
+anchor_top = -0.25
+anchor_right = 1.28
+anchor_bottom = 1.25
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="YSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 26.0
-margin_right = 471.0
-margin_bottom = 42.0
+anchor_top = 0.706
+anchor_right = 0.80459
+anchor_bottom = 0.973071
+margin_left = 74.0
+margin_top = 0.0239983
+margin_right = -0.938721
+margin_bottom = -0.000259399
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Amp/YSlider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.03333
+anchor_top = -0.25
+anchor_right = 1.28
+anchor_bottom = 1.25
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Freq" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
 margin_top = 188.0
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 248.0
 rect_min_size = Vector2( 0, 60 )
 text = "
 Frequency "
 
 [node name="XSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq" groups=["sliders"]]
-margin_left = 71.0
-margin_top = -2.0
-margin_right = 471.0
-margin_bottom = 14.0
+anchor_top = 0.223
+anchor_right = 0.803
+anchor_bottom = 0.49
+margin_left = 74.0
+margin_top = 0.00425911
+margin_right = -0.19809
+margin_bottom = -0.0157223
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/XSlider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.03313
+anchor_top = -0.3125
+anchor_right = 1.2798
+anchor_bottom = 1.1875
+margin_right = 3.05176e-05
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="YSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 26.0
-margin_right = 471.0
-margin_bottom = 42.0
+anchor_top = 0.69
+anchor_right = 0.803
+anchor_bottom = 0.956
+margin_left = 74.0
+margin_top = -0.0157242
+margin_right = -0.19809
+margin_bottom = 0.0242996
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Freq/YSlider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.03313
+anchor_top = -0.3125
+anchor_right = 1.2798
+anchor_bottom = 1.1875
+margin_right = 3.05176e-05
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Scale" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
 margin_top = 264.0
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 304.0
 rect_min_size = Vector2( 0, 40 )
 text = "Scale"
 
 [node name="Slider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 5.0
-margin_right = 471.0
-margin_bottom = 21.0
+anchor_left = 2.94698e-07
+anchor_right = 0.798283
+anchor_bottom = 0.4
+margin_left = 73.9999
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Scale/Slider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.04006
+anchor_top = -0.3125
+anchor_right = 1.28839
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Interleaved" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
 margin_top = 320.0
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 360.0
 rect_min_size = Vector2( 0, 40 )
 text = "Interleaved"
 
 [node name="Xcheck" type="CheckBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/Interleaved" groups=["checks"]]
-margin_left = 90.0
-margin_top = -5.0
-margin_right = 114.0
-margin_bottom = 19.0
+anchor_top = -0.125
+anchor_right = 0.231628
+anchor_bottom = 0.475
+margin_left = 83.9388
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="IAmp" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
 margin_top = 376.0
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 436.0
 rect_min_size = Vector2( 0, 60 )
 text = "Interleaved
 Amplitude"
 
 [node name="XSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp" groups=["sliders"]]
-margin_left = 75.0
-margin_top = -2.0
-margin_right = 475.0
-margin_bottom = 14.0
+anchor_top = -0.027
+anchor_right = 0.813
+anchor_bottom = 0.239738
+margin_left = 78.9385
+margin_top = 0.00427794
+margin_right = 0.0805359
 min_value = -1.0
 max_value = 1.0
 step = 0.05
 page = 0.05
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/XSlider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.01333
+anchor_top = -0.3125
+anchor_right = 1.26
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -1.0
 max_value = 1.0
 step = 0.05
 page = 0.05
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="YSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp" groups=["sliders"]]
-margin_left = 75.0
-margin_top = 26.0
-margin_right = 475.0
-margin_bottom = 42.0
+anchor_top = 0.439738
+anchor_right = 0.813
+anchor_bottom = 0.706
+margin_left = 78.9385
+margin_right = 0.0805359
+margin_bottom = 0.0242996
 min_value = -1.0
 max_value = 1.0
 step = 0.05
 page = 0.05
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IAmp/YSlider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.01333
+anchor_top = -0.3125
+anchor_right = 1.26
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -1.0
 max_value = 1.0
 step = 0.05
 page = 0.05
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="IFreq" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
 margin_top = 452.0
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 512.0
 rect_min_size = Vector2( 0, 60 )
 text = "Interleaved
 Frequency"
 
 [node name="XSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq" groups=["sliders"]]
-margin_left = 75.0
-margin_right = 475.0
-margin_bottom = 16.0
+anchor_right = 0.90469
+anchor_bottom = 0.266667
+margin_left = 78.9385
+margin_right = -42.647
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/XSlider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.02333
+anchor_top = -0.3125
+anchor_right = 1.27
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="YSlider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq" groups=["sliders"]]
-margin_left = 75.0
-margin_top = 26.0
-margin_right = 475.0
-margin_bottom = 42.0
+anchor_top = 0.5
+anchor_right = 0.90469
+anchor_bottom = 0.7
+margin_left = 78.9385
+margin_top = -4.00002
+margin_right = -42.647
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IFreq/YSlider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.02333
+anchor_top = -0.3125
+anchor_right = 1.27
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="IScale" type="Label" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer"]
 margin_top = 528.0
-margin_right = 73.0
+margin_right = 260.0
 margin_bottom = 588.0
 rect_min_size = Vector2( 0, 60 )
 text = "Interleaved
 Scale"
 
 [node name="Slider" type="HSlider" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale" groups=["sliders"]]
-margin_left = 75.0
-margin_top = -2.0
-margin_right = 475.0
-margin_bottom = 14.0
+anchor_left = 0.000131664
+anchor_top = -0.00640465
+anchor_right = 0.815451
+anchor_bottom = 0.4
+margin_left = 81.9386
+margin_top = 8.38428
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Distortion/ScrollContainer/VBoxContainer/IScale/Slider" groups=["lines"]]
-margin_left = 403.0
-margin_top = -5.0
-margin_right = 477.0
-margin_bottom = 19.0
+anchor_left = 1.03
+anchor_top = -0.3125
+anchor_right = 1.27832
+anchor_bottom = 1.1875
+margin_left = -2.93875
+margin_right = -2.93878
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Effects" type="Tabs" parent="TabContainer"]
 visible = false
@@ -505,28 +684,34 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+size_flags_horizontal = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Effects"]
-margin_right = 557.0
-margin_bottom = 636.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Effects/ScrollContainer"]
-margin_right = 70.0
-margin_bottom = 499.0
+margin_right = 272.689
+margin_bottom = 555.0
+size_flags_horizontal = 3
 custom_constants/separation = 16
 
 [node name="Move" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
-margin_right = 70.0
+margin_right = 260.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 70, 60 )
 text = "
 Move"
 
 [node name="XSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 5.0
-margin_right = 471.0
-margin_bottom = 21.0
+anchor_top = 0.24
+anchor_right = 0.794
+anchor_bottom = 0.506
+margin_left = 70.0
+margin_top = -0.0157232
+margin_right = -0.00402832
+margin_bottom = 0.0242748
 min_value = -10.0
 max_value = 10.0
 step = 0.1
@@ -534,246 +719,331 @@ page = 0.1
 scrollable = false
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/XSlider" groups=["lines"]]
-margin_left = 410.0
-margin_top = -5.0
-margin_right = 484.0
-margin_bottom = 19.0
+anchor_left = 1.02667
+anchor_top = -0.3125
+anchor_right = 1.27333
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="YSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 33.0
-margin_right = 471.0
-margin_bottom = 49.0
+anchor_top = 0.706405
+anchor_right = 0.793991
+anchor_bottom = 0.973
+margin_left = 70.0
+margin_bottom = 0.00427246
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Move/YSlider" groups=["lines"]]
-margin_left = 410.0
-margin_top = -5.0
-margin_right = 484.0
-margin_bottom = 19.0
+anchor_left = 1.02667
+anchor_top = -0.3125
+anchor_right = 1.27333
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Ping" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 76.0
-margin_right = 70.0
+margin_right = 260.0
 margin_bottom = 106.0
 rect_min_size = Vector2( 70, 30 )
 text = "Ping pong"
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Ping" groups=["checks"]]
+anchor_top = -0.2
+anchor_right = 0.188841
+anchor_bottom = 0.6
 margin_left = 64.0
-margin_top = -6.0
-margin_right = 88.0
-margin_bottom = 18.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="PalSft" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 122.0
-margin_right = 70.0
+margin_right = 260.0
 margin_bottom = 153.0
 rect_min_size = Vector2( 70, 30 )
 text = "Pallette
 Shift"
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSft" groups=["checks"]]
+anchor_top = -0.194
+anchor_right = 0.188841
+anchor_bottom = 0.580645
 margin_left = 64.0
-margin_top = -6.0
-margin_right = 88.0
-margin_bottom = 18.0
+margin_top = 0.0139999
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Pal" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
 margin_top = 169.0
-margin_right = 70.0
+margin_right = 260.0
 margin_bottom = 209.0
 rect_min_size = Vector2( 70, 40 )
 text = "Palette"
 
 [node name="Panel" type="Panel" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Pal"]
+anchor_right = 0.796137
+anchor_bottom = 1.0
 margin_left = 71.0
-margin_right = 201.0
-margin_bottom = 40.0
+margin_right = -11.9957
 
 [node name="TextureRect" type="TextureRect" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Pal"]
+anchor_right = 0.796137
+anchor_bottom = 1.0
 margin_left = 71.0
-margin_right = 201.0
-margin_bottom = 39.0
+margin_right = -11.9957
 expand = true
 stretch_mode = 1
 
 [node name="Button" type="Button" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Pal/TextureRect" groups=["buttons"]]
-margin_left = 140.0
-margin_top = 4.0
-margin_right = 214.0
-margin_bottom = 34.0
+anchor_left = 1.0
+anchor_top = 0.102564
+anchor_right = 1.0
+anchor_bottom = 0.872
+margin_left = 8.00429
+margin_top = 1.89744
+margin_right = 72.0043
+margin_bottom = -0.880001
 text = "Open"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="PalDemo" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
+material = SubResource( 1 )
+margin_top = 225.0
+margin_right = 260.0
+margin_bottom = 265.0
+rect_min_size = Vector2( 70, 40 )
+text = "Palette
+Demo"
+
+[node name="Panel" type="Panel" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalDemo"]
+anchor_right = 0.796137
+anchor_bottom = 1.0
+margin_left = 71.0
+margin_right = -11.9957
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalDemo"]
+material = SubResource( 2 )
+anchor_right = 0.796137
+anchor_bottom = 1.0
+margin_left = 71.0
+margin_right = -11.9957
+expand = true
+stretch_mode = 1
 
 [node name="PalSpd" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
-margin_top = 225.0
-margin_right = 70.0
-margin_bottom = 265.0
+margin_top = 281.0
+margin_right = 260.0
+margin_bottom = 321.0
 rect_min_size = Vector2( 70, 40 )
 text = "Palette
 Speed"
 
 [node name="Slider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 5.0
-margin_right = 471.0
-margin_bottom = 21.0
+anchor_top = 0.125
+anchor_right = 0.793991
+anchor_bottom = 0.525
+margin_left = 70.0
 min_value = -5.0
 max_value = 5.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/PalSpd/Slider" groups=["lines"]]
-margin_left = 410.0
-margin_top = -5.0
-margin_right = 484.0
-margin_bottom = 19.0
+anchor_left = 1.02667
+anchor_top = -0.3125
+anchor_right = 1.27333
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -5.0
 max_value = 5.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Brl" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
-margin_top = 281.0
-margin_right = 70.0
-margin_bottom = 311.0
+margin_top = 337.0
+margin_right = 260.0
+margin_bottom = 367.0
 rect_min_size = Vector2( 70, 30 )
 text = "FishEye"
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/Brl" groups=["checks"]]
-margin_left = 64.0
-margin_top = -6.0
-margin_right = 88.0
-margin_bottom = 18.0
+anchor_left = 0.137339
+anchor_top = -0.2
+anchor_right = 0.188841
+anchor_bottom = 0.6
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="FEPos" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
-margin_top = 327.0
-margin_right = 70.0
-margin_bottom = 387.0
+margin_top = 383.0
+margin_right = 260.0
+margin_bottom = 443.0
 rect_min_size = Vector2( 70, 60 )
-text = "
-FishEye
-Posiion"
+text = "FishEye
+Position"
 
 [node name="XSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 5.0
-margin_right = 471.0
-margin_bottom = 21.0
+anchor_top = -0.01
+anchor_right = 0.793991
+anchor_bottom = 0.256405
+margin_left = 70.0
+margin_top = -0.0157226
+margin_bottom = 9.53674e-07
 min_value = -10.0
 max_value = 10.0
 step = 0.05
 page = 0.05
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/XSlider" groups=["lines"]]
-margin_left = 410.0
-margin_top = -5.0
-margin_right = 484.0
-margin_bottom = 19.0
+anchor_left = 1.02667
+anchor_top = -0.3125
+anchor_right = 1.27333
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="YSlider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 33.0
-margin_right = 471.0
-margin_bottom = 49.0
+anchor_top = 0.456
+anchor_right = 0.793991
+anchor_bottom = 0.723071
+margin_left = 70.0
+margin_top = 0.0242748
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEPos/YSlider" groups=["lines"]]
-margin_left = 410.0
-margin_top = -5.0
-margin_right = 484.0
-margin_bottom = 19.0
+anchor_left = 1.02667
+anchor_top = -0.3125
+anchor_right = 1.27333
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="FEEfct" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
-margin_top = 403.0
-margin_right = 70.0
-margin_bottom = 443.0
+margin_top = 459.0
+margin_right = 260.0
+margin_bottom = 499.0
 rect_min_size = Vector2( 70, 40 )
 text = "FishEye
 Effect"
 
 [node name="Slider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct" groups=["sliders"]]
-margin_left = 71.0
+anchor_right = 0.793991
+anchor_bottom = 0.525
+margin_left = 70.0
 margin_top = 5.0
-margin_right = 471.0
-margin_bottom = 21.0
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEEfct/Slider" groups=["lines"]]
-margin_left = 410.0
-margin_top = -5.0
-margin_right = 484.0
-margin_bottom = 19.0
+anchor_left = 1.02667
+anchor_top = -0.3125
+anchor_right = 1.27333
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="FEScale" type="Label" parent="TabContainer/Effects/ScrollContainer/VBoxContainer"]
-margin_top = 459.0
-margin_right = 70.0
-margin_bottom = 499.0
+margin_top = 515.0
+margin_right = 260.0
+margin_bottom = 555.0
 rect_min_size = Vector2( 70, 40 )
 text = "FishEye
 Scale"
 
 [node name="Slider" type="HSlider" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale" groups=["sliders"]]
-margin_left = 71.0
-margin_top = 5.0
-margin_right = 471.0
-margin_bottom = 21.0
+anchor_top = 0.125
+anchor_right = 0.793991
+anchor_bottom = 0.525
+margin_left = 70.0
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
 scrollable = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LineEdit" type="SpinBox" parent="TabContainer/Effects/ScrollContainer/VBoxContainer/FEScale/Slider" groups=["lines"]]
-margin_left = 410.0
-margin_top = -5.0
-margin_right = 484.0
-margin_bottom = 19.0
+anchor_left = 1.02667
+anchor_top = -0.3125
+anchor_right = 1.27333
+anchor_bottom = 1.1875
 rect_min_size = Vector2( 30, 24 )
 min_value = -10.0
 max_value = 10.0
 step = 0.1
 page = 0.1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="palFileDialog" type="FileDialog" parent="TabContainer/Effects"]
 margin_top = -3.0
@@ -784,14 +1054,17 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png" )
-current_dir = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer"
-current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
+current_dir = "/home/samjs/Distortinator"
+current_path = "/home/samjs/Distortinator/"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 22.0
-margin_top = 13.0
-margin_right = 226.0
-margin_bottom = 33.0
+anchor_left = 0.0111111
+anchor_top = 0.025
+anchor_right = 0.530556
+anchor_bottom = 0.0527778
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="NewBG" type="Button" parent="HBoxContainer"]
 margin_right = 63.0
@@ -817,6 +1090,15 @@ margin_right = 190.0
 margin_bottom = 20.0
 text = "New Layer"
 
+[node name="FPSLabel" type="Label" parent="HBoxContainer"]
+margin_left = 194.0
+margin_top = 3.0
+margin_right = 332.0
+margin_bottom = 17.0
+size_flags_horizontal = 11
+text = "fps"
+align = 2
+
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 691.0
 margin_top = 22.0
@@ -826,8 +1108,8 @@ window_title = "Save Background"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.mbg" )
-current_dir = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer"
-current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
+current_dir = "/home/samjs/Distortinator"
+current_path = "/home/samjs/Distortinator/"
 
 [node name="FileDialog2" type="FileDialog" parent="."]
 margin_left = 691.0
@@ -839,16 +1121,16 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.mbg" )
-current_dir = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer"
-current_path = "/Users/My HP/OneDrive/Documents/Godot Projects/Distortionizer/"
+current_dir = "/home/samjs/Distortinator"
+current_path = "/home/samjs/Distortinator/"
 
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
-[connection signal="pressed" from="TabContainer/Layer/Open" to="." method="_on_imageOpen_pressed"]
 [connection signal="text_changed" from="TabContainer/Layer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="file_selected" from="TabContainer/Layer/LineEdit/FileDialog" to="." method="_on_FileDialog_file_selected"]
-[connection signal="pressed" from="TabContainer/Layer/Remove" to="." method="_on_Remove_pressed"]
+[connection signal="pressed" from="TabContainer/Layer/Open" to="." method="_on_imageOpen_pressed"]
 [connection signal="value_changed" from="TabContainer/Layer/Opacity/Slider" to="." method="_on_Opacity_value_changed"]
 [connection signal="value_changed" from="TabContainer/Layer/Opacity/Slider/LineEdit" to="." method="_on_AlphaLineEdit_value_changed"]
+[connection signal="pressed" from="TabContainer/Layer/Remove" to="." method="_on_Remove_pressed"]
 [connection signal="pressed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/Hdistort/XCheckBox" to="." method="_on_XCheckBox_pressed"]
 [connection signal="pressed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/Vdistort/XCheckBox" to="." method="_on_VDXCheckBox_pressed"]
 [connection signal="pressed" from="TabContainer/Distortion/ScrollContainer/VBoxContainer/Vdistort/YCheckBox2" to="." method="_on_VDYCheckBox_pressed"]
